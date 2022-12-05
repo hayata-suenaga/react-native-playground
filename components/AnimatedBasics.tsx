@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { TextInput, View, Animated, Button, Easing } from 'react-native';
+import { TextInput, View, Animated, Button, StyleSheet } from 'react-native';
 import RadioButtons from './shared/RadioButtons';
 
 type AnimationType = 'spring' | 'timing';
@@ -44,10 +44,9 @@ const AnimatedBasics = () => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Animated.View
         style={[
+          styles.box,
           {
-            height: 50,
-            width: 50,
-            backgroundColor: 'red',
+            transform: [{ translateX: xOffset }],
             opacity: xOffset.interpolate({
               inputRange: [-100, 0, 100],
               outputRange: [0.2, 1, 0.2],
@@ -55,7 +54,6 @@ const AnimatedBasics = () => {
               extrapolateRight: 'clamp',
             }),
           },
-          { transform: [{ translateX: xOffset }] },
         ]}
       />
       <Button title="Move the box" onPress={moveBoxRandom} />
@@ -74,17 +72,7 @@ const AnimatedBasics = () => {
               isNaN(parseInt(newValue)) ? 0 : parseInt(newValue)
             )
           }
-          style={{
-            marginTop: 16,
-            fontSize: 20,
-            fontWeight: '500',
-            borderRadius: 16,
-            borderWidth: 2,
-            paddingVertical: 8,
-            borderColor: '#d0d7de',
-            color: '#57606a',
-            textAlign: 'center',
-          }}
+          style={styles.textBox}
         />
       </View>
     </View>
@@ -92,3 +80,22 @@ const AnimatedBasics = () => {
 };
 
 export default AnimatedBasics;
+
+const styles = StyleSheet.create({
+  box: {
+    height: 50,
+    width: 50,
+    backgroundColor: 'red',
+  },
+  textBox: {
+    marginTop: 16,
+    fontSize: 20,
+    fontWeight: '500',
+    borderRadius: 16,
+    borderWidth: 2,
+    paddingVertical: 8,
+    borderColor: '#d0d7de',
+    color: '#57606a',
+    textAlign: 'center',
+  },
+});

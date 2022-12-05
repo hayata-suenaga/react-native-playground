@@ -1,7 +1,7 @@
 import { Key } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-const RadioButtons = <T,>({
+const RadioButtons = <T extends string>({
   choices,
   onChange,
   value,
@@ -17,7 +17,7 @@ const RadioButtons = <T,>({
       {choices.map((choice) => {
         return (
           <Pressable
-            key={choice as Key}
+            key={choice}
             onPress={() => onChange(choice)}
             style={{
               flexDirection: 'row',
@@ -31,7 +31,7 @@ const RadioButtons = <T,>({
                 choice === value ? styles.active : styles.inactive,
               ]}
             />
-            <Text>{choice as String}</Text>
+            <Text>{choice}</Text>
           </Pressable>
         );
       })}
